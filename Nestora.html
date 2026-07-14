@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nestora — Find Your Perfect Hostel. Match Your Perfect Roommate.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============ ROOT / THEME ============ */
+:root{
+  --forest:#2E7D32;
+  --forest-dark:#1B5E20;
+  --forest-light:#57A45C;
+  --beige:#F5E6CA;
+  --cream:#FFF8F0;
+  --brown:#4E342E;
+  --brown-soft:#7A5C50;
+  --orange:#FF8C42;
+  --yellow:#FFD166;
+  --white:#ffffff;
+  --shadow-sm:0 4px 14px rgba(78,52,46,0.10);
+  --shadow-md:0 10px 30px rgba(78,52,46,0.16);
+  --shadow-lg:0 20px 50px rgba(78,52,46,0.24);
+  --radius:18px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--cream);
+  color:var(--brown);
+  min-height:100vh;
+  overflow-x:hidden;
+}
+h1,h2,h3,h4,.brand{font-family:'Quicksand',sans-serif;}
+a{text-decoration:none;color:inherit;}
+button{font-family:inherit;cursor:pointer;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-thumb{background:var(--beige);border-radius:8px;}
+
+.hidden{display:none !important;}
+.view{min-height:100vh;}
+
+/* ============ LOGO (home figure) ============ */
+.logo-mark{
+  width:46px;height:46px;border-radius:14px;
+  background:linear-gradient(135deg,var(--forest),var(--forest-light));
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:var(--shadow-sm);
+  flex-shrink:0;
+}
+.logo-mark svg{width:26px;height:26px;}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.3rem;color:var(--brown);}
+.brand span.tag{display:block;font-family:'Nunito';font-weight:600;font-size:0.68rem;color:var(--forest-dark);letter-spacing:.03em;}
+
+/* ============ TOP NAV (landing) ============ */
+.topnav{
+  position:sticky;top:0;z-index:50;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 40px;
+  background:rgba(255,248,240,0.85);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(78,52,46,0.08);
+}
+.nav-actions{display:flex;gap:12px;}
+.btn{
+  border:none;padding:11px 22px;border-radius:30px;font-weight:700;font-size:0.92rem;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+}
+.btn:hover{transform:translateY(-2px);}
+.btn-primary{background:var(--forest);color:var(--white);box-shadow:var(--shadow-sm);}
+.btn-primary:hover{background:var(--forest-dark);box-shadow:var(--shadow-md);}
+.btn-outline{background:transparent;border:2px solid var(--forest);color:var(--forest-dark);}
+.btn-outline:hover{background:var(--forest);color:#fff;}
+.btn-orange{background:var(--orange);color:#fff;box-shadow:var(--shadow-sm);}
+.btn-orange:hover{box-shadow:var(--shadow-md);}
+.btn-ghost{background:rgba(78,52,46,0.06);color:var(--brown);}
+.btn-ghost:hover{background:rgba(78,52,46,0.12);}
+.btn-sm{padding:7px 14px;font-size:0.8rem;border-radius:20px;}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none;}
+
+/* ============ LANDING HERO ============ */
+.hero{
+  position:relative;
+  padding:70px 40px 90px;
+  text-align:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 15% 20%, rgba(46,125,50,0.10), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(255,140,66,0.14), transparent 45%),
+    linear-gradient(180deg, var(--cream) 0%, var(--beige) 100%);
+}
+.hero .deco{position:absolute;font-size:2.6rem;opacity:.18;filter:saturate(1.2);}
+.hero h1{font-size:2.6rem;margin:10px 0 6px;color:var(--brown);}
+.hero h1 em{color:var(--forest);font-style:normal;}
+.hero p.tagline{font-size:1.15rem;color:var(--brown-soft);max-width:560px;margin:0 auto 34px;}
+.hero-buttons{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.hero-card-btn{
+  width:250px;padding:26px 20px;border-radius:22px;border:none;
+  background:var(--white);box-shadow:var(--shadow-md);
+  transition:transform .2s ease, box-shadow .2s ease;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.hero-card-btn:hover{transform:translateY(-6px) scale(1.03);box-shadow:var(--shadow-lg);}
+.hero-card-btn .emoji{font-size:2.2rem;}
+.hero-card-btn h3{margin:0;color:var(--forest-dark);}
+.hero-card-btn p{margin:0;font-size:0.85rem;color:var(--brown-soft);}
+.hero-card-btn.b-hostel{border-bottom:5px solid var(--forest);}
+.hero-card-btn.b-room{border-bottom:5px solid var(--orange);}
+
+.features-strip{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;padding:40px 20px 70px;}
+.feature-pill{
+  background:var(--white);border-radius:16px;padding:18px 22px;box-shadow:var(--shadow-sm);
+  width:220px;text-align:center;transition:transform .2s;
+}
+.feature-pill:hover{transform:translateY(-4px);}
+.feature-pill .emoji{font-size:1.6rem;}
+.feature-pill h4{margin:8px 0 4px;font-size:0.95rem;color:var(--forest-dark);}
+.feature-pill p{margin:0;font-size:0.8rem;color:var(--brown-soft);}
+
+/* ============ AUTH VIEW ============ */
+.auth-page{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;padding:30px;
+  position:relative;
+  background:
+    linear-gradient(135deg, rgba(46,125,50,0.55), rgba(78,52,46,0.55)),
+    var(--auth-bg);
+  background-size:cover;background-position:center;
+}
+.auth-shell{
+  width:min(950px,100%);
+  display:grid;grid-template-columns:1fr 1fr;
+  border-radius:26px;overflow:hidden;box-shadow:var(--shadow-lg);
+}
+.auth-visual{
+  background:linear-gradient(160deg, rgba(46,125,50,0.92), rgba(27,94,32,0.92)), var(--auth-bg);
+  background-size:cover;background-blend-mode:multiply;
+  color:#fff;padding:44px 36px;display:flex;flex-direction:column;justify-content:center;gap:14px;
+}
+.auth-visual .logo-mark{background:rgba(255,255,255,0.18);}
+.auth-visual h2{font-size:1.6rem;margin:14px 0 4px;}
+.auth-visual p{opacity:.9;line-height:1.6;font-size:0.92rem;}
+.auth-visual ul{padding-left:18px;margin:14px 0 0;font-size:0.85rem;opacity:.92;line-height:1.9;}
+.auth-form-wrap{
+  background:rgba(255,248,240,0.97);
+  backdrop-filter:blur(16px);
+  padding:40px 36px;
+}
+.auth-tabs{display:flex;background:var(--beige);border-radius:30px;padding:4px;margin-bottom:22px;}
+.auth-tab{flex:1;text-align:center;padding:10px;border:none;background:transparent;border-radius:26px;font-weight:700;color:var(--brown-soft);}
+.auth-tab.active{background:var(--forest);color:#fff;box-shadow:var(--shadow-sm);}
+.field{margin-bottom:14px;}
+.field label{display:block;font-size:0.8rem;font-weight:700;margin-bottom:5px;color:var(--brown);}
+.field input,.field select,.field textarea{
+  width:100%;padding:11px 13px;border-radius:12px;border:1.5px solid rgba(78,52,46,0.18);
+  background:#fff;font-family:inherit;font-size:0.92rem;color:var(--brown);
+  transition:border .15s;
+}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--forest);}
+.role-toggle{display:flex;gap:10px;}
+.role-toggle label{flex:1;border:1.5px solid rgba(78,52,46,0.18);border-radius:12px;padding:10px;text-align:center;font-size:0.85rem;font-weight:700;cursor:pointer;}
+.role-toggle input{display:none;}
+.role-toggle input:checked + span{color:var(--forest-dark);}
+.role-toggle label:has(input:checked){border-color:var(--forest);background:rgba(46,125,50,0.08);}
+.err-msg{color:#c0392b;font-size:0.78rem;margin-top:4px;min-height:14px;}
+.form-note{font-size:0.78rem;color:var(--brown-soft);margin-top:14px;text-align:center;}
+.form-note a{color:var(--forest-dark);font-weight:700;cursor:pointer;}
+.otp-box{display:none;background:var(--beige);padding:12px;border-radius:12px;margin-top:10px;font-size:0.82rem;}
+.otp-box.show{display:block;}
+
+/* ============ DASHBOARD LAYOUT ============ */
+.app-shell{display:flex;min-height:100vh;}
+.sidebar{
+  width:230px;flex-shrink:0;background:linear-gradient(180deg,var(--forest-dark),var(--forest));
+  color:#fff;display:flex;flex-direction:column;padding:22px 14px;position:sticky;top:0;height:100vh;
+}
+.sidebar .brand{color:#fff;margin-bottom:26px;padding:0 8px;}
+.sidebar .brand .tag{color:rgba(255,255,255,0.75);}
+.sidenav{display:flex;flex-direction:column;gap:4px;flex:1;}
+.sidenav button{
+  display:flex;align-items:center;gap:12px;background:transparent;border:none;color:rgba(255,255,255,0.88);
+  padding:12px 14px;border-radius:12px;font-weight:600;font-size:0.9rem;text-align:left;transition:background .15s;
+}
+.sidenav button .ic{font-size:1.05rem;}
+.sidenav button:hover{background:rgba(255,255,255,0.10);}
+.sidenav button.active{background:rgba(255,255,255,0.22);box-shadow:inset 0 0 0 1px rgba(255,255,255,0.25);}
+.sidebar-foot{border-top:1px solid rgba(255,255,255,0.18);padding-top:12px;}
+
+.main{flex:1;padding:26px 34px 80px;max-width:100%;}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px;}
+.topbar h2{margin:0;color:var(--brown);}
+.topbar .sub{font-size:0.85rem;color:var(--brown-soft);margin-top:2px;}
+.user-chip{display:flex;align-items:center;gap:10px;background:#fff;padding:6px 14px 6px 6px;border-radius:30px;box-shadow:var(--shadow-sm);}
+.avatar{width:36px;height:36px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;object-fit:cover;overflow:hidden;}
+.avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%;}
+
+.tabview{display:none;}
+.tabview.active{display:block;}
+
+/* stat grid */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:26px;}
+.stat-card{
+  background:#fff;border-radius:var(--radius);padding:18px;box-shadow:var(--shadow-sm);
+  transition:transform .22s ease, box-shadow .22s ease;cursor:pointer;
+}
+.stat-card:hover{transform:scale(1.045);box-shadow:var(--shadow-md);z-index:2;}
+.stat-card h4{margin:0 0 8px;font-size:0.85rem;color:var(--brown-soft);display:flex;align-items:center;gap:6px;}
+canvas{display:block;}
+.stat-card canvas{width:100%;height:130px;max-height:130px;}
+#radarCanvas{width:100%;height:240px;}
+.skeleton{background:linear-gradient(90deg,#eee 25%,#f5f5f5 50%,#eee 75%);background-size:200% 100%;animation:shimmer 1.3s infinite;border-radius:10px;height:120px;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+.section-row{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;margin-bottom:26px;}
+.panel{background:#fff;border-radius:var(--radius);padding:20px 22px;box-shadow:var(--shadow-sm);}
+.panel h3{margin:0 0 14px;font-size:1.05rem;color:var(--brown);}
+.hist-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px dashed rgba(78,52,46,0.14);font-size:0.87rem;}
+.hist-item:last-child{border-bottom:none;}
+.badge{background:var(--beige);color:var(--forest-dark);padding:3px 10px;border-radius:20px;font-size:0.72rem;font-weight:700;}
+
+.quickbtns{display:flex;gap:16px;margin-bottom:26px;flex-wrap:wrap;}
+.quickbtns .hero-card-btn{width:220px;}
+
+/* filter bar */
+.filter-bar{display:flex;gap:14px;flex-wrap:wrap;align-items:end;background:#fff;padding:18px;border-radius:var(--radius);box-shadow:var(--shadow-sm);margin-bottom:22px;}
+.filter-bar .field{margin-bottom:0;min-width:140px;}
+.filter-bar .field.grow{flex:1;min-width:200px;}
+
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px;}
+.hcard,.rcard{background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .2s, box-shadow .2s;}
+.hcard:hover,.rcard:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);}
+.hcard-img{height:110px;display:flex;align-items:center;justify-content:center;font-size:2.4rem;background:linear-gradient(135deg,var(--beige),#fff);}
+.hcard-body{padding:14px 16px;}
+.hcard-body h4{margin:0 0 4px;font-size:1rem;}
+.hcard-meta{display:flex;flex-wrap:wrap;gap:6px;font-size:0.72rem;color:var(--brown-soft);margin:8px 0;}
+.hcard-meta span{background:var(--beige);padding:3px 8px;border-radius:10px;}
+.hcard-price{color:var(--forest-dark);font-weight:800;font-size:1.05rem;}
+.hcard-actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;}
+
+.rcard-top{display:flex;gap:12px;align-items:center;padding:16px 16px 8px;}
+.rcard .avatar{width:46px;height:46px;font-size:1rem;}
+.rcard-score{margin-left:auto;text-align:center;}
+.rcard-score b{display:block;font-size:1.15rem;color:var(--forest-dark);}
+.rcard-score small{font-size:0.65rem;color:var(--brown-soft);}
+.rcard-why{padding:0 16px 8px;font-size:0.76rem;color:var(--brown-soft);}
+.rcard-why span{display:inline-block;background:var(--beige);border-radius:10px;padding:3px 8px;margin:2px 4px 0 0;}
+.rcard-actions{display:flex;gap:6px;padding:10px 16px 16px;flex-wrap:wrap;}
+
+/* map placeholder */
+.map-box{
+  margin-top:22px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);
+  height:260px;position:relative;
+  background:
+   linear-gradient(rgba(46,125,50,0.06),rgba(46,125,50,0.06)),
+   repeating-linear-gradient(0deg, #eaf4ea, #eaf4ea 22px, #dcecdc 22px, #dcecdc 24px),
+   repeating-linear-gradient(90deg, transparent, transparent 22px, #dcecdc 22px, #dcecdc 24px);
+}
+.map-pin{position:absolute;font-size:1.4rem;transform:translate(-50%,-100%);filter:drop-shadow(0 3px 3px rgba(0,0,0,.25));}
+.map-tag{position:absolute;bottom:10px;left:10px;background:#fff;padding:6px 12px;border-radius:10px;font-size:0.75rem;box-shadow:var(--shadow-sm);}
+
+/* preferences form */
+.pref-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px 22px;}
+.range-row{display:flex;align-items:center;gap:10px;}
+.range-row input[type=range]{flex:1;accent-color:var(--forest);}
+.range-val{font-weight:700;color:var(--forest-dark);font-size:0.85rem;width:46px;text-align:right;}
+.chip-select{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{padding:7px 14px;border-radius:20px;border:1.5px solid rgba(78,52,46,0.2);font-size:0.8rem;font-weight:600;cursor:pointer;background:#fff;transition:.15s;}
+.chip.active{background:var(--forest);color:#fff;border-color:var(--forest);}
+
+/* schedule grid */
+.sched-table{width:100%;border-collapse:collapse;font-size:0.78rem;}
+.sched-table th{padding:8px;color:var(--brown-soft);font-size:0.72rem;}
+.sched-table td{padding:0;text-align:center;}
+.sched-cell{
+  width:100%;aspect-ratio:1.4/1;border:1px solid rgba(78,52,46,0.08);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:0.65rem;color:rgba(78,52,46,0.4);
+  transition:transform .1s;
+}
+.sched-cell:hover{transform:scale(1.06);z-index:1;}
+.sc-free{background:#EAF6EA;color:var(--forest-dark);}
+.sc-study{background:#FFF1DA;color:#8a5a00;}
+.sc-sleep{background:#E7E4F5;color:#4b3f8a;}
+.sc-busy{background:#FBE3E1;color:#a4392f;}
+.legend{display:flex;gap:14px;margin-top:12px;flex-wrap:wrap;font-size:0.76rem;}
+.legend span{display:flex;align-items:center;gap:6px;}
+.legend i{width:12px;height:12px;border-radius:4px;display:inline-block;}
+
+/* profile */
+.profile-head{display:flex;gap:20px;align-items:center;margin-bottom:20px;flex-wrap:wrap;}
+.avatar-big{width:96px;height:96px;border-radius:50%;background:var(--orange);color:#fff;display:flex;align-items:center;justify-content:center;font-size:2rem;font-weight:700;overflow:hidden;position:relative;flex-shrink:0;}
+.avatar-big img{width:100%;height:100%;object-fit:cover;}
+.upload-btn{position:absolute;bottom:-2px;right:-2px;background:var(--forest);color:#fff;border-radius:50%;width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-size:0.9rem;box-shadow:var(--shadow-sm);cursor:pointer;}
+
+/* toast */
+.toast{
+  position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--brown);color:#fff;padding:12px 22px;border-radius:30px;font-size:0.85rem;
+  box-shadow:var(--shadow-md);opacity:0;pointer-events:none;transition:.3s;z-index:999;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* chatbot */
+.chat-fab{
+  position:fixed;bottom:26px;right:26px;width:60px;height:60px;border-radius:50%;
+  background:linear-gradient(135deg,var(--forest),var(--forest-dark));color:#fff;border:none;
+  font-size:1.5rem;box-shadow:var(--shadow-lg);z-index:200;display:flex;align-items:center;justify-content:center;
+  transition:transform .2s;
+}
+.chat-fab:hover{transform:scale(1.08);}
+.chat-panel{
+  position:fixed;bottom:98px;right:26px;width:330px;max-width:88vw;height:430px;background:#fff;
+  border-radius:20px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;overflow:hidden;
+  z-index:200;transform:scale(0.9) translateY(10px);opacity:0;pointer-events:none;transition:.2s;
+}
+.chat-panel.open{transform:scale(1) translateY(0);opacity:1;pointer-events:auto;}
+.chat-head{background:var(--forest);color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px;}
+.chat-head b{font-size:0.92rem;}
+.chat-head small{display:block;opacity:.85;font-size:0.68rem;}
+.chat-body{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--cream);}
+.msg{max-width:80%;padding:9px 13px;border-radius:14px;font-size:0.82rem;line-height:1.4;}
+.msg.bot{background:var(--beige);color:var(--brown);align-self:flex-start;border-bottom-left-radius:4px;}
+.msg.user{background:var(--forest);color:#fff;align-self:flex-end;border-bottom-right-radius:4px;}
+.msg.suggest{align-self:flex-start;background:transparent;padding:0;display:flex;gap:6px;flex-wrap:wrap;}
+.msg.suggest button{background:#fff;border:1.5px solid var(--forest);color:var(--forest-dark);border-radius:14px;padding:6px 10px;font-size:0.74rem;font-weight:700;}
+.chat-input{display:flex;border-top:1px solid rgba(78,52,46,0.1);}
+.chat-input input{flex:1;border:none;padding:12px 14px;font-size:0.85rem;font-family:inherit;}
+.chat-input input:focus{outline:none;}
+.chat-input button{background:var(--forest);color:#fff;border:none;padding:0 18px;font-weight:700;}
+
+/* modal */
+.modal-overlay{position:fixed;inset:0;background:rgba(78,52,46,0.45);display:flex;align-items:center;justify-content:center;z-index:500;opacity:0;pointer-events:none;transition:.2s;}
+.modal-overlay.open{opacity:1;pointer-events:auto;}
+.modal{background:#fff;border-radius:20px;padding:24px;width:min(420px,92vw);box-shadow:var(--shadow-lg);max-height:86vh;overflow-y:auto;}
+.modal-close{float:right;background:transparent;border:none;font-size:1.2rem;color:var(--brown-soft);}
+
+footer.site-footer{text-align:center;padding:24px;font-size:0.78rem;color:var(--brown-soft);}
+
+@media(max-width:980px){
+  .stat-grid{grid-template-columns:repeat(2,1fr);}
+  .section-row{grid-template-columns:1fr;}
+  .auth-shell{grid-template-columns:1fr;}
+  .auth-visual{display:none;}
+}
+@media(max-width:720px){
+  .app-shell{flex-direction:column;}
+  .sidebar{width:100%;height:auto;position:relative;flex-direction:row;overflow-x:auto;}
+  .sidenav{flex-direction:row;}
+  .stat-grid{grid-template-columns:1fr 1fr;}
+  .main{padding:18px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ================= SHARED SVG HOME-FIGURE LOGO (referenced via template) ================= -->
+<template id="tpl-logo">
+  <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 6L6 20V42H18V30H30V42H42V20L24 6Z" fill="white"/>
+    <path d="M20 24C20 22 21.5 20 24 20C26.5 20 28 22 28 24" stroke="#2E7D32" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</template>
+
+<!-- =========================================================
+     LANDING VIEW
+========================================================= -->
+<div id="view-landing" class="view">
+  <div class="topnav">
+    <div class="brand" id="logoSlotNav"><span>Nestora<span class="tag">Hostel &amp; Roommate Finder</span></span></div>
+    <div class="nav-actions">
+      <button class="btn btn-outline" onclick="goAuth('login')">Log In</button>
+      <button class="btn btn-primary" onclick="goAuth('signup')">Sign Up</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div id="logoSlotHero" style="display:flex;justify-content:center;margin-bottom:10px;"></div>
+    <h1>Find Your Perfect <em>Hostel</em>.<br>Match Your Perfect <em>Roommate</em>.</h1>
+    <p class="tagline">A warm, welcoming home for students — search cozy hostels near your college and get matched with roommates who actually fit your vibe.</p>
+    <div class="hero-buttons">
+      <button class="hero-card-btn b-hostel" onclick="ctaEnter('hostel')">
+        <div class="emoji">🏠</div>
+        <h3>Hostel Finder</h3>
+        <p>Browse, filter &amp; book cozy hostels near you</p>
+      </button>
+      <button class="hero-card-btn b-room" onclick="ctaEnter('roommate')">
+        <div class="emoji">🤝</div>
+        <h3>Roommate Finder</h3>
+        <p>Get matched by sleep, study &amp; lifestyle habits</p>
+      </button>
+    </div>
+    <button class="btn btn-ghost" onclick="goAuth('signup')">Get started — it's free →</button>
+  </div>
+
+  <div class="features-strip">
+    <div class="feature-pill"><div class="emoji">📊</div><h4>Smart Dashboard</h4><p>Sleep, hobbies &amp; study stats at a glance</p></div>
+    <div class="feature-pill"><div class="emoji">🧭</div><h4>AI Compatibility</h4><p>Radar-chart match breakdowns</p></div>
+    <div class="feature-pill"><div class="emoji">🗓️</div><h4>Schedule Overlap</h4><p>Find shared free hours with matches</p></div>
+    <div class="feature-pill"><div class="emoji">💬</div><h4>HostBot Assistant</h4><p>Ask anything, get routed instantly</p></div>
+  </div>
+  <footer class="site-footer">Nestora — a cozy corner for student housing &amp; roommates.</footer>
+</div>
+
+<!-- =========================================================
+     AUTH VIEW
+========================================================= -->
+<div id="view-auth" class="view hidden">
+  <div class="auth-page">
+    <div class="auth-shell">
+      <div class="auth-visual">
+        <div id="logoSlotAuth"></div>
+        <h2>Welcome to Nestora</h2>
+        <p>Your cozy corner for finding the right hostel and the right roommate — all backed by smart, data-driven matching.</p>
+        <ul>
+          <li>🏠 Curated hostel listings near your college</li>
+          <li>🧩 AI-powered roommate compatibility scoring</li>
+          <li>📅 Schedule overlap so you actually meet up</li>
+          <li>💬 HostBot for instant answers, day or night</li>
+        </ul>
+      </div>
+      <div class="auth-form-wrap">
+        <div class="auth-tabs">
+          <button class="auth-tab active" id="tabLoginBtn" onclick="switchAuthTab('login')">Log In</button>
+          <button class="auth-tab" id="tabSignupBtn" onclick="switchAuthTab('signup')">Sign Up</button>
+        </div>
+
+        <!-- LOGIN FORM -->
+        <form id="loginForm" onsubmit="return handleLogin(event)">
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="loginEmail" placeholder="you@college.edu" required>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="loginPassword" placeholder="••••••••" required>
+          </div>
+          <div class="err-msg" id="loginErr"></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Log In</button>
+          <p class="form-note"><a onclick="startForgot()">Forgot password?</a></p>
+          <div class="otp-box" id="forgotBox">
+            <div class="field"><label>Enter your account email</label><input type="email" id="forgotEmail" placeholder="you@college.edu"></div>
+            <button type="button" class="btn btn-sm btn-orange" onclick="sendOtp()">Send OTP</button>
+            <div id="otpStep" class="hidden" style="margin-top:10px;">
+              <p style="font-size:0.75rem;">Demo OTP generated: <b id="otpShown"></b></p>
+              <div class="field"><label>Enter OTP</label><input type="text" id="otpInput"></div>
+              <div class="field"><label>New Password</label><input type="password" id="newPass"></div>
+              <button type="button" class="btn btn-sm btn-primary" onclick="resetPassword()">Reset Password</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- SIGNUP FORM -->
+        <form id="signupForm" class="hidden" onsubmit="return handleSignup(event)">
+          <div class="field">
+            <label>Full Name</label>
+            <input type="text" id="suName" placeholder="Aanya Sharma" required>
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" id="suEmail" placeholder="you@college.edu" required>
+          </div>
+          <div class="field">
+            <label>Password</label>
+            <input type="password" id="suPassword" placeholder="min 6 characters" required>
+          </div>
+          <div class="field">
+            <label>I am a</label>
+            <div class="role-toggle">
+              <label><input type="radio" name="role" value="student" checked><span>🎓 Student</span></label>
+              <label><input type="radio" name="role" value="owner"><span>🏠 Hostel Owner</span></label>
+            </div>
+          </div>
+          <div class="err-msg" id="signupErr"></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;">Create Account</button>
+          <p class="form-note">Already have an account? <a onclick="switchAuthTab('login')">Log in</a></p>
+        </form>
+
+        <p class="form-note" style="margin-top:18px;"><a onclick="goLanding()">← Back to home</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =========================================================
+     DASHBOARD / APP VIEW
+========================================================= -->
+<div id="view-app" class="view hidden">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand" id="logoSlotSide"><span>Nestora<span class="tag">student housing</span></span></div>
+      <div class="sidenav">
+        <button data-tab="home" class="active" onclick="switchTab('home')"><span class="ic">🏡</span> Dashboard</button>
+        <button data-tab="hostel" onclick="switchTab('hostel')"><span class="ic">🏠</span> Hostel Finder</button>
+        <button data-tab="roommate" onclick="switchTab('roommate')"><span class="ic">🤝</span> Roommate Finder</button>
+        <button data-tab="prefs" onclick="switchTab('prefs')"><span class="ic">⚙️</span> My Preferences</button>
+        <button data-tab="schedule" onclick="switchTab('schedule')"><span class="ic">🗓️</span> Day Schedule</button>
+        <button data-tab="profile" onclick="switchTab('profile')"><span class="ic">👤</span> My Profile</button>
+      </div>
+      <div class="sidebar-foot">
+        <button onclick="logout()"><span class="ic">🚪</span> Logout</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div>
+          <h2 id="welcomeHeading">Welcome back 👋</h2>
+          <div class="sub" id="welcomeSub">Here's what's cozy today.</div>
+        </div>
+        <div class="user-chip">
+          <div class="avatar" id="topAvatar">S</div>
+          <div>
+            <div style="font-weight:700;font-size:0.85rem;" id="topUserName">Student</div>
+            <div style="font-size:0.7rem;color:var(--brown-soft);" id="topUserRole">Student</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ---- TAB: HOME ---- -->
+      <section class="tabview active" id="tab-home">
+        <div class="quickbtns">
+          <button class="hero-card-btn b-hostel" onclick="switchTab('hostel')"><div class="emoji">🏠</div><h3>Hostel Finder</h3><p>Browse &amp; book nearby hostels</p></button>
+          <button class="hero-card-btn b-room" onclick="switchTab('roommate')"><div class="emoji">🤝</div><h3>Roommate Finder</h3><p>See your best-match roommates</p></button>
+        </div>
+
+        <div class="stat-grid">
+          <div class="stat-card"><h4>😴 Sleep Hours (week)</h4><canvas id="chartSleep"></canvas></div>
+          <div class="stat-card"><h4>🎨 Hobbies Breakdown</h4><canvas id="chartHobbies"></canvas></div>
+          <div class="stat-card"><h4>📚 Study vs Free Hours</h4><canvas id="chartStudy"></canvas></div>
+          <div class="stat-card"><h4>💞 Top Match Score</h4><canvas id="chartGauge"></canvas></div>
+        </div>
+
+        <div class="section-row">
+          <div class="panel">
+            <h3>🏨 Past Hostel History</h3>
+            <div id="pastHostelsList"></div>
+          </div>
+          <div class="panel">
+            <h3>🧑‍🤝‍🧑 Past Roommate History</h3>
+            <div id="pastRoommatesList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---- TAB: HOSTEL FINDER ---- -->
+      <section class="tabview" id="tab-hostel">
+        <div class="filter-bar">
+          <div class="field grow"><label>Search</label><input type="text" id="hfSearch" placeholder="Search hostel name..." oninput="renderHostels()"></div>
+          <div class="field"><label>Max Budget (₹/mo)</label><input type="number" id="hfBudget" placeholder="10000" oninput="renderHostels()"></div>
+          <div class="field"><label>Gender</label>
+            <select id="hfGender" onchange="renderHostels()"><option value="">Any</option><option>Boys</option><option>Girls</option><option>Co-ed</option></select>
+          </div>
+          <div class="field"><label>AC</label>
+            <select id="hfAc" onchange="renderHostels()"><option value="">Any</option><option>AC</option><option>Non-AC</option></select>
+          </div>
+          <div class="field"><label>WiFi</label>
+            <select id="hfWifi" onchange="renderHostels()"><option value="">Any</option><option>Yes</option><option>No</option></select>
+          </div>
+        </div>
+        <div class="card-grid" id="hostelGrid"></div>
+        <div class="map-box" id="hostelMap">
+          <div class="map-tag">📍 Map preview — hostel pins &amp; nearby essentials</div>
+        </div>
+      </section>
+
+      <!-- ---- TAB: ROOMMATE FINDER ---- -->
+      <section class="tabview" id="tab-roommate">
+        <div class="panel" style="margin-bottom:20px;">
+          <h3>How matching works</h3>
+          <p style="font-size:0.85rem;color:var(--brown-soft);margin:0;">We compare your <b>sleep schedule, cleanliness, study habits, budget &amp; social energy</b> against every candidate using a weighted compatibility score (0–100%).</p>
+        </div>
+        <div class="card-grid" id="roommateGrid"></div>
+      </section>
+
+      <!-- ---- TAB: PREFERENCES ---- -->
+      <section class="tabview" id="tab-prefs">
+        <div class="panel">
+          <h3>⚙️ My Preferences</h3>
+          <div class="pref-grid">
+            <div class="field">
+              <label>Sleep Time</label>
+              <div class="range-row"><input type="range" id="pSleepTime" min="20" max="26" value="23" oninput="syncRange('pSleepTime','pSleepTimeVal',v=>fmtHour(v))"><span class="range-val" id="pSleepTimeVal">11 PM</span></div>
+            </div>
+            <div class="field">
+              <label>Wake Time</label>
+              <div class="range-row"><input type="range" id="pWakeTime" min="4" max="11" value="7" oninput="syncRange('pWakeTime','pWakeTimeVal',v=>fmtHour(v))"><span class="range-val" id="pWakeTimeVal">7 AM</span></div>
+            </div>
+            <div class="field">
+              <label>Cleanliness (1-10)</label>
+              <div class="range-row"><input type="range" id="pClean" min="1" max="10" value="7" oninput="syncRange('pClean','pCleanVal')"><span class="range-val" id="pCleanVal">7</span></div>
+            </div>
+            <div class="field">
+              <label>Study Hours / day</label>
+              <div class="range-row"><input type="range" id="pStudy" min="0" max="10" value="4" oninput="syncRange('pStudy','pStudyVal')"><span class="range-val" id="pStudyVal">4</span></div>
+            </div>
+            <div class="field">
+              <label>Monthly Budget (₹)</label>
+              <input type="number" id="pBudget" value="8000">
+            </div>
+            <div class="field">
+              <label>Social Energy — Introvert ↔ Extrovert</label>
+              <div class="range-row"><input type="range" id="pSocial" min="1" max="10" value="5" oninput="syncRange('pSocial','pSocialVal')"><span class="range-val" id="pSocialVal">5</span></div>
+            </div>
+            <div class="field">
+              <label>Food Preference</label>
+              <select id="pFood"><option>Vegetarian</option><option>Non-Vegetarian</option><option>Vegan</option><option>Eggetarian</option></select>
+            </div>
+            <div class="field">
+              <label>Language</label>
+              <select id="pLang"><option>English</option><option>Hindi</option><option>Regional</option><option>Multilingual</option></select>
+            </div>
+            <div class="field">
+              <label>Smoking / Drinking</label>
+              <select id="pSmoke"><option>None</option><option>Occasional</option><option>Regular</option></select>
+            </div>
+            <div class="field">
+              <label>Pets</label>
+              <select id="pPets"><option>No preference</option><option>Pet-friendly</option><option>No pets</option></select>
+            </div>
+          </div>
+          <div class="field" style="margin-top:10px;">
+            <label>Music Genres</label>
+            <div class="chip-select" id="musicChips"></div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="savePrefs()">💾 Save Preferences</button>
+        </div>
+      </section>
+
+      <!-- ---- TAB: DAY SCHEDULE ---- -->
+      <section class="tabview" id="tab-schedule">
+        <div class="panel">
+          <h3>🗓️ Day Schedule</h3>
+          <p style="font-size:0.82rem;color:var(--brown-soft);">Click a cell to cycle: Free → Study → Sleep → Busy. Used for the Schedule Overlap Finder.</p>
+          <table class="sched-table" id="schedTable"></table>
+          <div class="legend">
+            <span><i style="background:#EAF6EA;"></i>Free</span>
+            <span><i style="background:#FFF1DA;"></i>Study</span>
+            <span><i style="background:#E7E4F5;"></i>Sleep</span>
+            <span><i style="background:#FBE3E1;"></i>Busy</span>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="saveSchedule()">💾 Save Schedule</button>
+        </div>
+      </section>
+
+      <!-- ---- TAB: PROFILE ---- -->
+      <section class="tabview" id="tab-profile">
+        <div class="panel">
+          <h3>👤 My Profile</h3>
+          <div class="profile-head">
+            <div class="avatar-big" id="profAvatarBig">S
+              <label class="upload-btn" title="Upload photo">📷
+                <input type="file" id="avatarUpload" accept="image/*" style="display:none;" onchange="uploadAvatar(event)">
+              </label>
+            </div>
+            <div>
+              <div style="font-weight:800;font-size:1.2rem;" id="profNameShow">Student</div>
+              <div style="color:var(--brown-soft);font-size:0.85rem;" id="profEmailShow">you@college.edu</div>
+            </div>
+          </div>
+          <div class="pref-grid">
+            <div class="field"><label>Full Name</label><input type="text" id="profName"></div>
+            <div class="field"><label>Email</label><input type="email" id="profEmail" disabled></div>
+            <div class="field"><label>College / University</label><input type="text" id="profCollege" placeholder="e.g. Delhi University"></div>
+            <div class="field"><label>Study Hours / day</label><input type="number" id="profStudyHours" value="4"></div>
+          </div>
+          <div class="field" style="margin-top:8px;">
+            <label>Short Bio</label>
+            <textarea id="profBio" rows="3" placeholder="A little about you..."></textarea>
+          </div>
+          <div class="field" style="margin-top:8px;">
+            <label>Hobbies</label>
+            <div class="chip-select" id="hobbyChips"></div>
+          </div>
+          <button class="btn btn-primary" style="margin-top:16px;" onclick="saveProfile()">💾 Save Profile</button>
+        </div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<!-- =========================================================
+     RADAR / OVERLAP MODAL
+========================================================= -->
+<div class="modal-overlay" id="matchModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h3 id="modalTitle">Compatibility Radar</h3>
+    <canvas id="radarCanvas" height="240"></canvas>
+    <div id="overlapArea" style="margin-top:14px;"></div>
+  </div>
+</div>
+
+<!-- =========================================================
+     CHATBOT
+========================================================= -->
+<button class="chat-fab" id="chatFab" onclick="toggleChat()">💬</button>
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <div class="logo-mark" style="width:34px;height:34px;background:rgba(255,255,255,0.2);" id="logoSlotChat"></div>
+    <div><b>HostBot</b><small>Ask about hostels, roommates &amp; more</small></div>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-input">
+    <input type="text" id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter')sendChat()">
+    <button onclick="sendChat()">➤</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   NESTORA — client-side data layer (localStorage "DB")
+   ============================================================ */
+const AUTH_BG = "data:image/svg+xml;utf8," + encodeURIComponent(`
+<svg xmlns='http://www.w3.org/2000/svg' width='800' height='600'>
+  <rect width='800' height='600' fill='#4E342E'/>
+  <rect x='0' y='380' width='800' height='220' fill='#6B4A3A'/>
+  <circle cx='650' cy='120' r='90' fill='#7CA982' opacity='0.5'/>
+  <circle cx='120' cy='90' r='60' fill='#F7B267' opacity='0.4'/>
+  <rect x='60' y='260' width='220' height='150' rx='14' fill='#F5E6CA' opacity='0.35'/>
+  <rect x='520' y='240' width='180' height='170' rx='14' fill='#FFD166' opacity='0.25'/>
+</svg>`);
+document.documentElement.style.setProperty('--auth-bg', `url("${AUTH_BG}")`);
+
+const DB_KEY = "nestora_db_v1";
+function loadDB(){
+  let db = JSON.parse(localStorage.getItem(DB_KEY) || "null");
+  if(!db){ db = {users:{}, session:null}; saveDB(db); }
+  return db;
+}
+function saveDB(db){ localStorage.setItem(DB_KEY, JSON.stringify(db)); }
+function currentUser(){
+  const db = loadDB();
+  if(!db.session) return null;
+  return db.users[db.session] || null;
+}
+
+const HOBBY_LIST = ["Reading","Gaming","Music","Sports","Cooking","Art","Movies","Coding","Fitness","Photography","Dance","Travel"];
+const MUSIC_LIST = ["Pop","Rock","Lo-fi","Hip-Hop","Classical","EDM","Indie","Bollywood"];
+
+const MOCK_HOSTELS = [
+  {name:"Green Nest PG", price:6500, distance:0.8, rating:4.5, ac:"Non-AC", wifi:"Yes", gender:"Boys", emoji:"🌿"},
+  {name:"Maple Comfort Hostel", price:9200, distance:1.4, rating:4.7, ac:"AC", wifi:"Yes", gender:"Co-ed", emoji:"🍁"},
+  {name:"Sunrise Girls PG", price:7800, distance:0.5, rating:4.6, ac:"AC", wifi:"Yes", gender:"Girls", emoji:"🌅"},
+  {name:"Budget Buddy Hostel", price:4200, distance:2.1, rating:3.9, ac:"Non-AC", wifi:"No", gender:"Boys", emoji:"💸"},
+  {name:"Willow Study Nest", price:8600, distance:1.0, rating:4.4, ac:"AC", wifi:"Yes", gender:"Co-ed", emoji:"📖"},
+  {name:"Cedar Comfort Rooms", price:5900, distance:1.7, rating:4.1, ac:"Non-AC", wifi:"Yes", gender:"Girls", emoji:"🌲"},
+  {name:"Fireside Boys PG", price:7200, distance:0.9, rating:4.3, ac:"AC", wifi:"Yes", gender:"Boys", emoji:"🔥"},
+  {name:"Harbor View Hostel", price:9900, distance:2.6, rating:4.8, ac:"AC", wifi:"Yes", gender:"Co-ed", emoji:"🌆"}
+];
+
+const MOCK_ROOMMATES = [
+  {name:"Riya Kapoor", sleep:23, wake:7, clean:8, study:5, budget:8000, social:4, hobbies:["Reading","Music","Art"]},
+  {name:"Arjun Mehta", sleep:24, wake:8, clean:6, study:3, budget:7000, social:8, hobbies:["Gaming","Sports","Music"]},
+  {name:"Simran Kaur", sleep:22, wake:6, clean:9, study:6, budget:9000, social:3, hobbies:["Cooking","Reading","Fitness"]},
+  {name:"Devansh Rao", sleep:25, wake:9, clean:5, study:4, budget:6000, social:7, hobbies:["Coding","Gaming","Movies"]},
+  {name:"Neha Joshi", sleep:23, wake:7, clean:7, study:5, budget:8500, social:5, hobbies:["Dance","Art","Travel"]},
+  {name:"Kabir Singh", sleep:24, wake:8, clean:6, study:4, budget:7500, social:6, hobbies:["Sports","Photography","Music"]}
+];
+
+/* ============================================================
+   VIEW ROUTER
+   ============================================================ */
+function showView(id){
+  document.querySelectorAll(".view").forEach(v=>v.classList.add("hidden"));
+  document.getElementById(id).classList.remove("hidden");
+  window.scrollTo(0,0);
+}
+function goLanding(){ showView("view-landing"); }
+function goAuth(tab){ showView("view-auth"); switchAuthTab(tab); }
+function ctaEnter(target){
+  const u = currentUser();
+  if(u){ enterApp(); switchTab(target==="hostel"?"hostel":"roommate"); }
+  else { goAuth("signup"); }
+}
+function switchAuthTab(tab){
+  document.getElementById("tabLoginBtn").classList.toggle("active", tab==="login");
+  document.getElementById("tabSignupBtn").classList.toggle("active", tab==="signup");
+  document.getElementById("loginForm").classList.toggle("hidden", tab!=="login");
+  document.getElementById("signupForm").classList.toggle("hidden", tab!=="signup");
+}
+
+/* ============================================================
+   AUTH LOGIC
+   ============================================================ */
+function handleSignup(e){
+  e.preventDefault();
+  const name = document.getElementById("suName").value.trim();
+  const email = document.getElementById("suEmail").value.trim().toLowerCase();
+  const pass = document.getElementById("suPassword").value;
+  const role = document.querySelector('input[name="role"]:checked').value;
+  const errEl = document.getElementById("signupErr");
+  errEl.textContent = "";
+
+  if(!name || !email || !pass){ errEl.textContent = "Please fill in all fields."; return false; }
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ errEl.textContent = "Enter a valid email address."; return false; }
+  if(pass.length < 6){ errEl.textContent = "Password must be at least 6 characters."; return false; }
+
+  const db = loadDB();
+  if(db.users[email]){ errEl.textContent = "An account with this email already exists."; return false; }
+
+  db.users[email] = {
+    name, email, password: pass, role,
+    profile: {name, email, college:"", bio:"", studyHours:4, hobbies:["Reading","Music"], avatar:null},
+    prefs: {sleep:23, wake:7, clean:7, study:4, budget:8000, social:5, food:"Vegetarian", lang:"English", smoke:"None", pets:"No preference", music:["Lo-fi","Pop"]},
+    schedule: defaultSchedule(),
+    history: {hostels: [], roommates: []}
+  };
+  db.session = email;
+  saveDB(db);
+  toast("Account created — welcome to Nestora! 🎉");
+  enterApp();
+  return false;
+}
+
+function handleLogin(e){
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value.trim().toLowerCase();
+  const pass = document.getElementById("loginPassword").value;
+  const errEl = document.getElementById("loginErr");
+  errEl.textContent = "";
+  const db = loadDB();
+  const u = db.users[email];
+  if(!u || u.password !== pass){ errEl.textContent = "Invalid email or password."; return false; }
+  db.session = email;
+  saveDB(db);
+  toast("Welcome back, " + u.name.split(" ")[0] + "! 👋");
+  enterApp();
+  return false;
+}
+
+function logout(){
+  const db = loadDB();
+  db.session = null;
+  saveDB(db);
+  goLanding();
+}
+
+/* forgot password (mock OTP) */
+let currentOtp = null;
+function startForgot(){ document.getElementById("forgotBox").classList.toggle("show"); }
+function sendOtp(){
+  const email = document.getElementById("forgotEmail").value.trim().toLowerCase();
+  const db = loadDB();
+  if(!db.users[email]){ toast("No account found with that email."); return; }
+  currentOtp = Math.floor(1000 + Math.random()*9000).toString();
+  document.getElementById("otpShown").textContent = currentOtp;
+  document.getElementById("otpStep").classList.remove("hidden");
+  toast("OTP sent (demo mode — shown on screen).");
+}
+function resetPassword(){
+  const email = document.getElementById("forgotEmail").value.trim().toLowerCase();
+  const otp = document.getElementById("otpInput").value.trim();
+  const newPass = document.getElementById("newPass").value;
+  if(otp !== currentOtp){ toast("Incorrect OTP."); return; }
+  if(newPass.length < 6){ toast("New password must be at least 6 characters."); return; }
+  const db = loadDB();
+  db.users[email].password = newPass;
+  saveDB(db);
+  toast("Password reset! Please log in.");
+  document.getElementById("forgotBox").classList.remove("show");
+}
+
+/* ============================================================
+   APP ENTRY
+   ============================================================ */
+function enterApp(){
+  const u = currentUser();
+  if(!u){ goLanding(); return; }
+  showView("view-app");
+  document.getElementById("welcomeHeading").textContent = `Welcome back, ${u.name.split(" ")[0]} 👋`;
+  document.getElementById("topUserName").textContent = u.name;
+  document.getElementById("topUserRole").textContent = u.role === "owner" ? "Hostel Owner" : "Student";
+  const initials = u.name.split(" ").map(x=>x[0]).slice(0,2).join("").toUpperCase();
+  const topAv = document.getElementById("topAvatar");
+  topAv.innerHTML = u.profile.avatar ? `<img src="${u.profile.avatar}">` : initials;
+
+  buildChips("musicChips", MUSIC_LIST, u.prefs.music, true);
+  buildChips("hobbyChips", HOBBY_LIST, u.profile.hobbies, true);
+  loadPrefsForm(u);
+  loadProfileForm(u);
+  buildScheduleTable(u);
+  renderHostels();
+  renderRoommates();
+  renderHistory(u);
+  renderCharts(u);
+  initChat(u);
+  switchTab("home");
+}
+
+function switchTab(tab){
+  document.querySelectorAll(".sidenav button").forEach(b=>b.classList.toggle("active", b.dataset.tab===tab));
+  document.querySelectorAll(".tabview").forEach(t=>t.classList.remove("active"));
+  document.getElementById("tab-"+tab).classList.add("active");
+  if(tab === "home"){
+    const u = currentUser();
+    if(u) requestAnimationFrame(()=> renderCharts(u));
+  }
+}
+
+/* ============================================================
+   UTIL
+   ============================================================ */
+function toast(msg){
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(window._toastT);
+  window._toastT = setTimeout(()=>t.classList.remove("show"), 2600);
+}
+function fmtHour(v){
+  v = parseInt(v);
+  const h = v % 24;
+  const ampm = h < 12 || h === 24 ? "AM" : "PM";
+  let disp = h % 12; if(disp === 0) disp = 12;
+  return disp + " " + (h < 12 ? "AM" : (h < 24 ? "PM" : "AM"));
+}
+function syncRange(inputId, outId, fmt){
+  const v = document.getElementById(inputId).value;
+  document.getElementById(outId).textContent = fmt ? fmt(v) : v;
+}
+function buildChips(containerId, list, selected, multi){
+  const c = document.getElementById(containerId);
+  c.innerHTML = "";
+  list.forEach(item=>{
+    const chip = document.createElement("div");
+    chip.className = "chip" + (selected.includes(item) ? " active" : "");
+    chip.textContent = item;
+    chip.onclick = ()=>{
+      chip.classList.toggle("active");
+    };
+    chip.dataset.value = item;
+    c.appendChild(chip);
+  });
+}
+function getActiveChips(containerId){
+  return [...document.querySelectorAll("#"+containerId+" .chip.active")].map(c=>c.dataset.value);
+}
+
+function defaultSchedule(){
+  // 7 days x 4 blocks (Morning, Afternoon, Evening, Night) -> state cycles Free/Study/Sleep/Busy
+  const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  const blocks = ["Morning","Afternoon","Evening","Night"];
+  const grid = {};
+  days.forEach(d=>{
+    grid[d] = blocks.map((b,i)=> i===3 ? "sleep" : (i===1 ? "study" : "free"));
+  });
+  return grid;
+}
+
+/* ============================================================
+   PREFERENCES TAB
+   ============================================================ */
+function loadPrefsForm(u){
+  const p = u.prefs;
+  document.getElementById("pSleepTime").value = p.sleep;
+  document.getElementById("pWakeTime").value = p.wake;
+  document.getElementById("pClean").value = p.clean;
+  document.getElementById("pStudy").value = p.study;
+  document.getElementById("pBudget").value = p.budget;
+  document.getElementById("pSocial").value = p.social;
+  document.getElementById("pFood").value = p.food;
+  document.getElementById("pLang").value = p.lang;
+  document.getElementById("pSmoke").value = p.smoke;
+  document.getElementById("pPets").value = p.pets;
+  syncRange("pSleepTime","pSleepTimeVal",fmtHour);
+  syncRange("pWakeTime","pWakeTimeVal",fmtHour);
+  syncRange("pClean","pCleanVal");
+  syncRange("pStudy","pStudyVal");
+  syncRange("pSocial","pSocialVal");
+}
+function savePrefs(){
+  const db = loadDB();
+  const u = db.users[db.session];
+  u.prefs = {
+    sleep: parseInt(document.getElementById("pSleepTime").value),
+    wake: parseInt(document.getElementById("pWakeTime").value),
+    clean: parseInt(document.getElementById("pClean").value),
+    study: parseInt(document.getElementById("pStudy").value),
+    budget: parseInt(document.getElementById("pBudget").value) || 0,
+    social: parseInt(document.getElementById("pSocial").value),
+    food: document.getElementById("pFood").value,
+    lang: document.getElementById("pLang").value,
+    smoke: document.getElementById("pSmoke").value,
+    pets: document.getElementById("pPets").value,
+    music: getActiveChips("musicChips")
+  };
+  saveDB(db);
+  toast("Preferences saved 🌿");
+  renderRoommates();
+  renderCharts(u);
+}
+
+/* ============================================================
+   PROFILE TAB
+   ============================================================ */
+function loadProfileForm(u){
+  document.getElementById("profName").value = u.profile.name || u.name;
+  document.getElementById("profEmail").value = u.email;
+  document.getElementById("profCollege").value = u.profile.college || "";
+  document.getElementById("profStudyHours").value = u.profile.studyHours || 4;
+  document.getElementById("profBio").value = u.profile.bio || "";
+  document.getElementById("profNameShow").textContent = u.profile.name || u.name;
+  document.getElementById("profEmailShow").textContent = u.email;
+  const big = document.getElementById("profAvatarBig");
+  const initials = (u.profile.name||u.name).split(" ").map(x=>x[0]).slice(0,2).join("").toUpperCase();
+  big.innerHTML = (u.profile.avatar ? `<img src="${u.profile.avatar}">` : initials) +
+    `<label class="upload-btn" title="Upload photo">📷<input type="file" id="avatarUpload" accept="image/*" style="display:none;" onchange="uploadAvatar(event)"></label>`;
+}
+function uploadAvatar(e){
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    const db = loadDB();
+    const u = db.users[db.session];
+    u.profile.avatar = ev.target.result;
+    saveDB(db);
+    loadProfileForm(u);
+    document.getElementById("topAvatar").innerHTML = `<img src="${ev.target.result}">`;
+    toast("Profile photo updated 📷");
+  };
+  reader.readAsDataURL(file);
+}
+function saveProfile(){
+  const db = loadDB();
+  const u = db.users[db.session];
+  u.profile.name = document.getElementById("profName").value.trim() || u.name;
+  u.profile.college = document.getElementById("profCollege").value.trim();
+  u.profile.studyHours = parseInt(document.getElementById("profStudyHours").value) || 0;
+  u.profile.bio = document.getElementById("profBio").value.trim();
+  u.profile.hobbies = getActiveChips("hobbyChips");
+  saveDB(db);
+  toast("Profile saved 💾");
+  loadProfileForm(u);
+  document.getElementById("welcomeHeading").textContent = `Welcome back, ${u.profile.name.split(" ")[0]} 👋`;
+  document.getElementById("topUserName").textContent = u.profile.name;
+  renderCharts(u);
+}
+
+/* ============================================================
+   DAY SCHEDULE TAB
+   ============================================================ */
+const SCHED_STATES = ["free","study","sleep","busy"];
+function buildScheduleTable(u){
+  const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  const blocks = ["Morning","Afternoon","Evening","Night"];
+  const table = document.getElementById("schedTable");
+  let html = "<tr><th></th>" + days.map(d=>`<th>${d}</th>`).join("") + "</tr>";
+  blocks.forEach((b,bi)=>{
+    html += `<tr><th style="text-align:left;padding:6px;">${b}</th>`;
+    days.forEach(d=>{
+      const state = u.schedule[d][bi];
+      html += `<td><div class="sched-cell sc-${state}" data-day="${d}" data-block="${bi}" onclick="cycleCell(this)">${state[0].toUpperCase()}</div></td>`;
+    });
+    html += "</tr>";
+  });
+  table.innerHTML = html;
+}
+function cycleCell(el){
+  const cur = SCHED_STATES.findIndex(s=>el.classList.contains("sc-"+s));
+  const next = SCHED_STATES[(cur+1) % SCHED_STATES.length];
+  SCHED_STATES.forEach(s=>el.classList.remove("sc-"+s));
+  el.classList.add("sc-"+next);
+  el.textContent = next[0].toUpperCase();
+}
+function saveSchedule(){
+  const db = loadDB();
+  const u = db.users[db.session];
+  const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  document.querySelectorAll(".sched-cell").forEach(cell=>{
+    const day = cell.dataset.day, block = parseInt(cell.dataset.block);
+    const state = SCHED_STATES.find(s=>cell.classList.contains("sc-"+s));
+    u.schedule[day][block] = state;
+  });
+  saveDB(db);
+  toast("Schedule saved 🗓️");
+  renderCharts(u);
+}
+
+/* ============================================================
+   HOSTEL FINDER
+   ============================================================ */
+function renderHostels(){
+  const search = (document.getElementById("hfSearch")?.value || "").toLowerCase();
+  const budget = parseInt(document.getElementById("hfBudget")?.value) || Infinity;
+  const gender = document.getElementById("hfGender")?.value || "";
+  const ac = document.getElementById("hfAc")?.value || "";
+  const wifi = document.getElementById("hfWifi")?.value || "";
+
+  const filtered = MOCK_HOSTELS.filter(h=>
+    h.name.toLowerCase().includes(search) &&
+    h.price <= budget &&
+    (!gender || h.gender === gender) &&
+    (!ac || h.ac === ac) &&
+    (!wifi || h.wifi === wifi)
+  );
+
+  const grid = document.getElementById("hostelGrid");
+  grid.innerHTML = filtered.length ? "" : `<p style="color:var(--brown-soft);">No hostels match those filters yet — try widening your search.</p>`;
+  filtered.forEach(h=>{
+    const card = document.createElement("div");
+    card.className = "hcard";
+    card.innerHTML = `
+      <div class="hcard-img">${h.emoji}</div>
+      <div class="hcard-body">
+        <h4>${h.name}</h4>
+        <div class="hcard-price">₹${h.price.toLocaleString()}/mo</div>
+        <div class="hcard-meta">
+          <span>⭐ ${h.rating}</span><span>📍 ${h.distance} km</span><span>${h.ac}</span><span>📶 ${h.wifi}</span><span>${h.gender}</span>
+        </div>
+        <div class="hcard-actions">
+          <button class="btn btn-sm btn-ghost" onclick="toast('Saved to favorites ❤️')">Save</button>
+          <button class="btn btn-sm btn-outline" onclick="toast('Added to comparison ⚖️')">Compare</button>
+          <button class="btn btn-sm btn-primary" onclick="bookHostel('${h.name.replace(/'/g,"")}')">Book Now</button>
+        </div>
+      </div>`;
+    grid.appendChild(card);
+  });
+
+  // map pins
+  const map = document.getElementById("hostelMap");
+  map.querySelectorAll(".map-pin").forEach(p=>p.remove());
+  filtered.slice(0,8).forEach((h,i)=>{
+    const pin = document.createElement("div");
+    pin.className = "map-pin";
+    pin.style.left = (12 + (i*11)%80) + "%";
+    pin.style.top = (25 + (i*17)%55) + "%";
+    pin.title = h.name;
+    pin.textContent = "📍";
+    map.appendChild(pin);
+  });
+}
+function bookHostel(name){
+  const db = loadDB();
+  const u = db.users[db.session];
+  u.history.hostels.unshift({name, date: new Date().toLocaleDateString(), rating: (4 + Math.random()).toFixed(1)});
+  saveDB(db);
+  toast(`Booked ${name} 🎉`);
+  renderHistory(u);
+}
+
+/* ============================================================
+   ROOMMATE FINDER + COMPATIBILITY (numpy-style weighted score)
+   ============================================================ */
+const WEIGHTS = {sleep:0.22, clean:0.2, study:0.2, budget:0.18, social:0.2};
+function computeCompat(prefs, other){
+  const sleepDiff = Math.min(Math.abs(prefs.sleep - other.sleep), 6) / 6;
+  const cleanDiff = Math.abs(prefs.clean - other.clean) / 9;
+  const studyDiff = Math.abs(prefs.study - other.study) / 10;
+  const budgetDiff = Math.min(Math.abs(prefs.budget - other.budget), 6000) / 6000;
+  const socialDiff = Math.abs(prefs.social - other.social) / 9;
+  const weighted = WEIGHTS.sleep*sleepDiff + WEIGHTS.clean*cleanDiff + WEIGHTS.study*studyDiff + WEIGHTS.budget*budgetDiff + WEIGHTS.social*socialDiff;
+  return Math.round((1 - weighted) * 100);
+}
+function renderRoommates(){
+  const db = loadDB();
+  const u = db.users[db.session];
+  const p = u.prefs;
+  const ranked = MOCK_ROOMMATES.map(r=>({...r, score: computeCompat(p, r)})).sort((a,b)=>b.score - a.score);
+  const grid = document.getElementById("roommateGrid");
+  grid.innerHTML = "";
+  ranked.forEach(r=>{
+    const initials = r.name.split(" ").map(x=>x[0]).join("");
+    const reasons = [];
+    if(Math.abs(p.sleep - r.sleep) <= 1) reasons.push("Similar sleep time");
+    if(Math.abs(p.clean - r.clean) <= 2) reasons.push("Cleanliness match");
+    if(Math.abs(p.study - r.study) <= 1) reasons.push("Study habits");
+    if(Math.abs(p.budget - r.budget) <= 1500) reasons.push("Budget fit");
+    if(Math.abs(p.social - r.social) <= 2) reasons.push("Social energy");
+    if(!reasons.length) reasons.push("Some shared habits");
+
+    const card = document.createElement("div");
+    card.className = "rcard";
+    card.innerHTML = `
+      <div class="rcard-top">
+        <div class="avatar">${initials}</div>
+        <div><b>${r.name}</b><div style="font-size:0.72rem;color:var(--brown-soft);">${r.hobbies.slice(0,2).join(", ")}</div></div>
+        <div class="rcard-score"><b>${r.score}%</b><small>match</small></div>
+      </div>
+      <div class="rcard-why">${reasons.map(x=>`<span>${x}</span>`).join("")}</div>
+      <div class="rcard-actions">
+        <button class="btn btn-sm btn-outline" onclick='openRadar(${JSON.stringify(r).replace(/'/g,"&#39;")})'>📊 Radar</button>
+        <button class="btn btn-sm btn-outline" onclick='openOverlap(${JSON.stringify(r).replace(/'/g,"&#39;")})'>🗓️ Overlap</button>
+        <button class="btn btn-sm btn-primary" onclick="matchRoommate('${r.name.replace(/'/g,"")}', ${r.score})">Connect</button>
+      </div>`;
+    grid.appendChild(card);
+  });
+}
+function matchRoommate(name, score){
+  const db = loadDB();
+  const u = db.users[db.session];
+  u.history.roommates.unshift({name, score, date: new Date().toLocaleDateString(), feedback:"Pending first meetup"});
+  saveDB(db);
+  toast(`Connected with ${name} 🤝`);
+  renderHistory(u);
+}
+
+/* ---- Radar modal ---- */
+function openRadar(r){
+  const db = loadDB();
+  const u = db.users[db.session];
+  const p = u.prefs;
+  document.getElementById("modalTitle").textContent = `You vs ${r.name}`;
+  document.getElementById("overlapArea").innerHTML = "";
+  document.getElementById("matchModal").classList.add("open");
+  const labels = ["Sleep","Cleanliness","Study Habits","Budget","Social Energy"];
+  const meVals = [10-Math.abs(p.sleep-23), p.clean, p.study, Math.min(10,p.budget/1000), p.social];
+  const themVals = [10-Math.abs(r.sleep-23), r.clean, r.study, Math.min(10,r.budget/1000), r.social];
+  // let the modal lay out before measuring/drawing the canvas
+  requestAnimationFrame(()=> drawRadarChart("radarCanvas", labels,
+    [ {name:"You", color:"#2E7D32", fill:"rgba(46,125,50,0.22)", values:meVals},
+      {name:r.name, color:"#FF8C42", fill:"rgba(255,140,66,0.22)", values:themVals} ], 10));
+}
+function openOverlap(r){
+  const db = loadDB();
+  const u = db.users[db.session];
+  document.getElementById("modalTitle").textContent = `Schedule Overlap with ${r.name}`;
+  document.getElementById("matchModal").classList.add("open");
+  clearCanvas("radarCanvas");
+
+  const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  const blocks = ["Morning","Afternoon","Evening","Night"];
+  // deterministic pseudo-schedule for the mock roommate based on name hash
+  const seed = r.name.length;
+  let html = "<table class='sched-table'><tr><th></th>" + days.map(d=>`<th>${d}</th>`).join("") + "</tr>";
+  let bestDay="", bestBlock="";
+  blocks.forEach((b,bi)=>{
+    html += `<tr><th style="text-align:left;padding:4px;">${b}</th>`;
+    days.forEach((d,di)=>{
+      const mine = u.schedule[d][bi];
+      const theirsFree = (di+bi+seed) % 3 !== 0; // mock free/busy pattern
+      const overlap = (mine === "free" || mine==="study") && theirsFree;
+      if(overlap && !bestDay){ bestDay=d; bestBlock=b; }
+      html += `<td><div class="sched-cell" style="cursor:default;background:${overlap?'#D8F0D8':'#f4f0ec'};color:${overlap?'#1B5E20':'#bbb'};">${overlap?'✓':'—'}</div></td>`;
+    });
+    html += "</tr>";
+  });
+  html += "</table>";
+  const summary = bestDay ? `<p style="margin-top:10px;font-size:0.85rem;">✨ You're both usually free on <b>${bestDay} ${bestBlock}</b> — good time to plan a study session or hangout!</p>` :
+    `<p style="margin-top:10px;font-size:0.85rem;">No strong overlap found yet — try adjusting your Day Schedule.</p>`;
+  document.getElementById("overlapArea").innerHTML = html + summary;
+}
+function closeModal(){ document.getElementById("matchModal").classList.remove("open"); }
+
+/* ============================================================
+   HISTORY
+   ============================================================ */
+function renderHistory(u){
+  const hEl = document.getElementById("pastHostelsList");
+  hEl.innerHTML = u.history.hostels.length ? "" : `<p style="color:var(--brown-soft);font-size:0.85rem;">No hostel bookings yet — try the Hostel Finder!</p>`;
+  u.history.hostels.slice(0,6).forEach(h=>{
+    hEl.innerHTML += `<div class="hist-item"><span>${h.name}<br><small style="color:var(--brown-soft);">${h.date}</small></span><span class="badge">⭐ ${h.rating}</span></div>`;
+  });
+  const rEl = document.getElementById("pastRoommatesList");
+  rEl.innerHTML = u.history.roommates.length ? "" : `<p style="color:var(--brown-soft);font-size:0.85rem;">No roommate connections yet — try the Roommate Finder!</p>`;
+  u.history.roommates.slice(0,6).forEach(r=>{
+    rEl.innerHTML += `<div class="hist-item"><span>${r.name}<br><small style="color:var(--brown-soft);">${r.date} · ${r.feedback}</small></span><span class="badge">${r.score}%</span></div>`;
+  });
+}
+
+/* ============================================================
+   DASHBOARD CHARTS
+   Drawn with plain Canvas 2D — no external chart library, so
+   everything renders even completely offline / with no CDN access.
+   ============================================================ */
+
+/* prep a canvas for crisp drawing: match its CSS box in real pixels */
+function prepCanvas(id, cssHeight){
+  const cv = document.getElementById(id);
+  if(!cv) return null;
+  const dpr = window.devicePixelRatio || 1;
+  const cssWidth = cv.clientWidth || cv.parentElement.clientWidth || 260;
+  cv.style.width = cssWidth + "px";
+  cv.style.height = cssHeight + "px";
+  cv.width = Math.max(1, Math.round(cssWidth * dpr));
+  cv.height = Math.max(1, Math.round(cssHeight * dpr));
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, cssWidth, cssHeight);
+  return {ctx, w: cssWidth, h: cssHeight};
+}
+function clearCanvas(id){
+  const cv = document.getElementById(id);
+  if(!cv) return;
+  const ctx = cv.getContext("2d");
+  ctx.clearRect(0, 0, cv.width, cv.height);
+}
+
+/* simple vertical bar chart */
+function drawBarChart(id, labels, data, color, maxVal){
+  const box = prepCanvas(id, 130);
+  if(!box) return;
+  const {ctx, w, h} = box;
+  const padTop = 10, padBottom = 18, padSide = 6;
+  const chartH = h - padTop - padBottom;
+  const barW = (w - padSide*2) / data.length;
+  ctx.font = "9px Nunito, sans-serif";
+  ctx.fillStyle = "#7A5C50";
+  ctx.textAlign = "center";
+  data.forEach((v, i)=>{
+    const bh = Math.max(2, (v / maxVal) * chartH);
+    const x = padSide + i*barW + barW*0.18;
+    const bw = barW*0.64;
+    const y = padTop + (chartH - bh);
+    ctx.fillStyle = color;
+    roundRectPath(ctx, x, y, bw, bh, 4);
+    ctx.fill();
+    ctx.fillStyle = "#7A5C50";
+    ctx.fillText(labels[i], x + bw/2, h - 4);
+  });
+}
+
+/* horizontal stacked bar (single row, 2 segments) */
+function drawStackedBar(id, segments, total){
+  const box = prepCanvas(id, 90);
+  if(!box) return;
+  const {ctx, w, h} = box;
+  const barY = h/2 - 16, barH = 32, padSide = 6;
+  const trackW = w - padSide*2;
+  let x = padSide;
+  segments.forEach(seg=>{
+    const segW = Math.max(2, (seg.value/total) * trackW);
+    ctx.fillStyle = seg.color;
+    roundRectPath(ctx, x, barY, segW, barH, 8);
+    ctx.fill();
+    x += segW;
+  });
+  ctx.font = "10px Nunito, sans-serif";
+  ctx.textAlign = "left";
+  let lx = padSide;
+  segments.forEach(seg=>{
+    ctx.fillStyle = seg.color;
+    ctx.fillRect(lx, h - 14, 8, 8);
+    ctx.fillStyle = "#4E342E";
+    ctx.fillText(`${seg.label} (${seg.value}h)`, lx + 12, h - 6);
+    lx += ctx.measureText(`${seg.label} (${seg.value}h)`).width + 26;
+  });
+}
+
+/* doughnut chart with optional legend */
+function drawDoughnut(id, labels, data, colors, cutout, opts){
+  opts = opts || {};
+  const box = prepCanvas(id, opts.height || 130);
+  if(!box) return;
+  const {ctx, w, h} = box;
+  const legendH = opts.legend === false ? 0 : 26;
+  const cx = w/2, cy = (h - legendH)/2 + 4;
+  const r = Math.min(cx, cy) - 6;
+  const total = data.reduce((a,b)=>a+b, 0) || 1;
+  let start = -Math.PI/2;
+  data.forEach((v,i)=>{
+    const angle = (v/total) * Math.PI * 2;
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.arc(cx, cy, r, start, start+angle);
+    ctx.closePath();
+    ctx.fillStyle = colors[i % colors.length];
+    ctx.fill();
+    start += angle;
+  });
+  // cutout hole
+  ctx.globalCompositeOperation = "destination-out";
+  ctx.beginPath();
+  ctx.arc(cx, cy, r * (cutout||0), 0, Math.PI*2);
+  ctx.fill();
+  ctx.globalCompositeOperation = "source-over";
+  if(opts.centerText){
+    ctx.fillStyle = "#4E342E";
+    ctx.font = "bold 15px Quicksand, sans-serif";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(opts.centerText, cx, cy);
+    ctx.textBaseline = "alphabetic";
+  }
+  if(opts.legend !== false){
+    ctx.font = "8.5px Nunito, sans-serif";
+    ctx.textAlign = "left";
+    let lx = 4, ly = h - 8, rowW = 0;
+    labels.forEach((lab,i)=>{
+      const text = lab.length > 10 ? lab.slice(0,9)+"…" : lab;
+      const textW = ctx.measureText(text).width;
+      if(lx + 12 + textW > w - 4){ lx = 4; ly -= 12; }
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.fillRect(lx, ly-8, 8, 8);
+      ctx.fillStyle = "#7A5C50";
+      ctx.fillText(text, lx+11, ly);
+      lx += 12 + textW + 8;
+    });
+  }
+}
+
+function roundRectPath(ctx, x, y, w, h, r){
+  ctx.beginPath();
+  ctx.moveTo(x+r, y);
+  ctx.arcTo(x+w, y, x+w, y+h, r);
+  ctx.arcTo(x+w, y+h, x, y+h, r);
+  ctx.arcTo(x, y+h, x, y, r);
+  ctx.arcTo(x, y, x+w, y, r);
+  ctx.closePath();
+}
+
+/* radar / spider chart with multiple datasets */
+function drawRadarChart(id, labels, datasets, maxVal){
+  const cv = document.getElementById(id);
+  if(!cv) return;
+  const box = prepCanvas(id, 240);
+  if(!box) return;
+  const {ctx, w, h} = box;
+  const cx = w/2, cy = h/2 - 6;
+  const r = Math.min(cx, cy) - 34;
+  const n = labels.length;
+  const angleStep = (Math.PI*2) / n;
+
+  // grid rings
+  ctx.strokeStyle = "rgba(78,52,46,0.15)";
+  ctx.lineWidth = 1;
+  for(let ring=1; ring<=4; ring++){
+    ctx.beginPath();
+    for(let i=0;i<=n;i++){
+      const a = -Math.PI/2 + i*angleStep;
+      const rr = r * (ring/4);
+      const x = cx + rr*Math.cos(a), y = cy + rr*Math.sin(a);
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    }
+    ctx.stroke();
+  }
+  // axis lines + labels
+  ctx.fillStyle = "#4E342E";
+  ctx.font = "10px Nunito, sans-serif";
+  labels.forEach((lab,i)=>{
+    const a = -Math.PI/2 + i*angleStep;
+    const x = cx + r*Math.cos(a), y = cy + r*Math.sin(a);
+    ctx.strokeStyle = "rgba(78,52,46,0.15)";
+    ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y); ctx.stroke();
+    const lx = cx + (r+16)*Math.cos(a), ly = cy + (r+16)*Math.sin(a);
+    ctx.textAlign = Math.abs(Math.cos(a)) < 0.2 ? "center" : (Math.cos(a) > 0 ? "left" : "right");
+    ctx.fillText(lab, lx, ly);
+  });
+  // datasets
+  datasets.forEach(ds=>{
+    ctx.beginPath();
+    ds.values.forEach((v,i)=>{
+      const a = -Math.PI/2 + i*angleStep;
+      const rr = r * Math.min(1, v/maxVal);
+      const x = cx + rr*Math.cos(a), y = cy + rr*Math.sin(a);
+      i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    });
+    ctx.closePath();
+    ctx.fillStyle = ds.fill;
+    ctx.fill();
+    ctx.strokeStyle = ds.color;
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  });
+  // legend
+  ctx.font = "10px Nunito, sans-serif";
+  let lx = cx - (datasets.length*70)/2, ly = h - 6;
+  datasets.forEach(ds=>{
+    ctx.fillStyle = ds.color;
+    ctx.fillRect(lx, ly-8, 9, 9);
+    ctx.fillStyle = "#4E342E";
+    ctx.textAlign = "left";
+    ctx.fillText(ds.name, lx+13, ly);
+    lx += 90;
+  });
+}
+
+function renderCharts(u){
+  const days = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  const dayShort = ["M","T","W","T","F","S","S"];
+  // sleep hours per day derived from schedule: count 'sleep' blocks *1.5h approx + base
+  const sleepHours = days.map(d=>{
+    const sleepBlocks = u.schedule[d].filter(s=>s==="sleep").length;
+    return 5 + sleepBlocks*1.5 + (Math.abs(u.prefs.wake - u.prefs.sleep%24) % 3);
+  }).map(v=>Math.min(10, Math.round(v*10)/10));
+  drawBarChart("chartSleep", dayShort, sleepHours, "#57A45C", 10);
+
+  const hobbies = u.profile.hobbies.length ? u.profile.hobbies : ["Reading","Music"];
+  const hobbyData = hobbies.map(()=>Math.round(10+Math.random()*20));
+  const hobbyColors = ["#2E7D32","#FF8C42","#FFD166","#7CA982","#4E342E","#F5E6CA","#57A45C"];
+  drawDoughnut("chartHobbies", hobbies, hobbyData, hobbyColors, 0.55, {legend:true, height:130});
+
+  const studyH = u.prefs.study, freeH = Math.max(1, 16 - studyH - 8);
+  drawStackedBar("chartStudy", [
+    {label:"Study", value:studyH, color:"#4E342E"},
+    {label:"Free", value:freeH, color:"#FFD166"}
+  ], studyH+freeH);
+
+  const best = MOCK_ROOMMATES.map(r=>computeCompat(u.prefs, r)).sort((a,b)=>b-a)[0] || 0;
+  drawDoughnut("chartGauge", ["Match","Remaining"], [best, 100-best], ["#FF8C42","#F5E6CA"], 0.72, {legend:false, height:130, centerText: best+"%"});
+}
+/* redraw charts on resize so they stay crisp */
+window.addEventListener("resize", ()=>{
+  const u = currentUser();
+  if(u && document.getElementById("tab-home").classList.contains("active")) renderCharts(u);
+});
+
+/* ============================================================
+   CHATBOT (HostBot) — rule based
+   ============================================================ */
+function initChat(u){
+  const body = document.getElementById("chatBody");
+  body.innerHTML = "";
+  addBotMsg(`Hey ${u.name.split(" ")[0]}! I'm HostBot 🏠 Ask me about hostels, roommates, budget, or bookings.`);
+}
+function addBotMsg(text){
+  const body = document.getElementById("chatBody");
+  const div = document.createElement("div");
+  div.className = "msg bot";
+  div.textContent = text;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+function addUserMsg(text){
+  const body = document.getElementById("chatBody");
+  const div = document.createElement("div");
+  div.className = "msg user";
+  div.textContent = text;
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+function addSuggestion(label, tab){
+  const body = document.getElementById("chatBody");
+  const div = document.createElement("div");
+  div.className = "msg suggest";
+  const btn = document.createElement("button");
+  btn.textContent = label;
+  btn.onclick = ()=>{ switchTab(tab); toggleChat(); };
+  div.appendChild(btn);
+  body.appendChild(div);
+  body.scrollTop = body.scrollHeight;
+}
+function toggleChat(){ document.getElementById("chatPanel").classList.toggle("open"); }
+function sendChat(){
+  const input = document.getElementById("chatInput");
+  const text = input.value.trim();
+  if(!text) return;
+  addUserMsg(text);
+  input.value = "";
+  setTimeout(()=>botReply(text.toLowerCase()), 380);
+}
+function botReply(text){
+  if(/hostel|room|pg|stay|rent|book/.test(text)){
+    addBotMsg("Here are cozy hostels matching typical budgets nearby! Want me to open the Hostel Finder?");
+    addSuggestion("🏠 Open Hostel Finder", "hostel");
+  } else if(/roommate|match|compatib|partner/.test(text)){
+    addBotMsg("I can show you your best-matched roommates based on sleep, study & budget habits!");
+    addSuggestion("🤝 Open Roommate Finder", "roommate");
+  } else if(/budget|price|cost|cheap/.test(text)){
+    addBotMsg("You can filter hostels by max budget in the Hostel Finder — I'll take you there.");
+    addSuggestion("🏠 Filter by Budget", "hostel");
+  } else if(/schedule|free time|overlap|timetable/.test(text)){
+    addBotMsg("Set your Day Schedule and I'll help find overlapping free hours with your roommate matches!");
+    addSuggestion("🗓️ Open Day Schedule", "schedule");
+  } else if(/safety|safe|security/.test(text)){
+    addBotMsg("Most listed hostels have verified owners, CCTV & warden support. Always visit in person before booking, and share your location with a friend when you do.");
+  } else if(/hi|hello|hey/.test(text)){
+    addBotMsg("Hi there! 👋 Want help finding a hostel or a roommate today?");
+  } else {
+    addBotMsg("I can help with hostel search, roommate matching, budgets, or your schedule — try asking about one of those!");
+  }
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+document.addEventListener("DOMContentLoaded", ()=>{
+  // inject home-figure logo into all slots
+  const tpl = document.getElementById("tpl-logo");
+  ["logoSlotNav","logoSlotHero","logoSlotAuth","logoSlotSide","logoSlotChat"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    const mark = document.createElement("div");
+    mark.className = "logo-mark";
+    mark.appendChild(tpl.content.cloneNode(true));
+    if(id === "logoSlotHero"){ mark.style.width="64px"; mark.style.height="64px"; }
+    el.prepend(mark);
+  });
+
+  const db = loadDB();
+  if(db.session && db.users[db.session]){
+    enterApp();
+  } else {
+    goLanding();
+  }
+});
+</script>
+</body>
+</html>
